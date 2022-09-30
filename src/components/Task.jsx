@@ -20,9 +20,9 @@ export default function Task({ task }) {
   return (
     <ListItem>
       <TaskCard onMouseEnter={showCloseIcon} onMouseLeave={hideCloseIcon}>
-        <CropSquareIcon />
+        <CropSquareIcon sx={{ mx: 1 }} />
         {task}
-        <CloseIcon visibility={visible} />
+        <CloseIcon visibility={visible} sx={{ mx: 0.5 }} />
       </TaskCard>
     </ListItem>
   );
@@ -37,4 +37,6 @@ const ListItem = styled.li`
 const TaskCard = styled(Card)`
   padding: 1em;
   display: flex;
+  border-radius: 0.4em;
+  margin-bottom: 0.4em;
 `;

@@ -1,13 +1,15 @@
+import { useContext } from "react";
 import styled from "styled-components";
 
+import { TaskContext } from "../context/TaskContext";
 import Task from "./Task";
 
-const sampleTasks = ["Pick up something to eat", "Don't sleep", "Lather, rinse, repeat"];
-
 export default function List() {
+  const { allTasks } = useContext(TaskContext);
+
   return (
     <TaskList>
-      {sampleTasks.map((task, index) => {
+      {allTasks.map((task, index) => {
         return <Task id={index} task={task} />;
       })}
     </TaskList>

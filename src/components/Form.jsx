@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TaskContext } from "../context/TaskContext";
 import styled from "styled-components";
 import { Button, FormControl, TextField, FormHelperText } from "@mui/material";
 
 export default function Form() {
+  const { allTasks, setAllTasks } = useContext(TaskContext);
   const [task, setTask] = useState("");
 
   function handleChange(ev) {
@@ -12,7 +14,9 @@ export default function Form() {
 
   function handleSubmit(ev) {
     ev.preventDefault();
+    setAllTasks((allTasks) => [...allTasks, task]);
     setTask("");
+    console.log(allTasks);
   }
 
   return (
