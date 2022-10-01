@@ -8,7 +8,7 @@ export default function Header() {
         <Toolbar>
           <IconButton></IconButton>
           <Typography sx={{ mr: 2 }}>GARDEN TO-DO</Typography>
-          <Box sx={{ flexGrow: 0, border: 1 }}>Menu</Box>
+          <Box sx={{ flexGrow: 0 }}>Menu</Box>
         </Toolbar>
       </Box>
     </Container>

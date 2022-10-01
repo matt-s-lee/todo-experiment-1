@@ -20,7 +20,7 @@ export default function Form() {
   }
 
   return (
-    <FormWrapper>
+    <FormWrapper onSubmit={handleSubmit}>
       <FormControl variant="standard">
         <InputField label="Task" variant="outlined" value={task} onChange={handleChange} />
         <FormHelperText id="component-helper-text">Type to-do task here</FormHelperText>
