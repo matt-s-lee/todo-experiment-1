@@ -8,7 +8,7 @@ export default function List({ taskArray, listName }) {
     <TaskList listName={listName}>
       <Title>{listName}</Title>
       {taskArray.map((task, index, arr) => {
-        return <Task key={index} task={task} index={index} listName={listName} />;
+        return <Task key={index + task} task={task} index={index} listName={listName} />;
       })}
     </TaskList>
   );
