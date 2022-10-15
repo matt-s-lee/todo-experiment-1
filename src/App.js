@@ -7,12 +7,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import List from "./components/List";
+import { Divider } from "./components/Divider";
 import { Box } from "@mui/system";
 import { TaskContext } from "./context/TaskContext";
 
 const darkTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
   },
 });
 
@@ -25,6 +26,7 @@ export default function App() {
       <Header />
       <Wrapper>
         <Form />
+        <Divider>Center</Divider>
         {allTasks && <List listName="To-Do" taskArray={allTasks} />}
         {finishedTasks && <List listName="Finished" taskArray={finishedTasks} />}
       </Wrapper>
