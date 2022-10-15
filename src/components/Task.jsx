@@ -11,9 +11,9 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 export default function Task({ task, index, listName }) {
   const [toggleX, setToggleX] = useState("hidden");
   const [toggleCheck, setToggleCheck] = useState(false);
-  // eslint-disable-next-line
+  const [clicked, setClicked] = useState(false);
+  const [editedTask, setEditedTask] = useState("");
   const { allTasks, setAllTasks, finishedTasks, setFinishedTasks } = useContext(TaskContext);
-  console.log(finishedTasks);
 
   function showCloseIcon() {
     setToggleX("visible");
@@ -21,6 +21,26 @@ export default function Task({ task, index, listName }) {
 
   function hideCloseIcon() {
     setToggleX("hidden");
+  }
+
+  function toggleEdit(ev) {
+    ev.stopPropagation();
+    setClicked(!clicked);
+  }
+
+  function editTask(ev) {
+    ev.preventDefault();
+    if (finishedTasks.includes(task)) {
+      const clonedTasks = finishedTasks.slice();
+      clonedTasks[index] = editedTask;
+      setFinishedTasks(clonedTasks);
+      setEditedTask("");
+    } else {
+      const clonedTasks = allTasks.slice();
+      clonedTasks[index] = editedTask;
+      setAllTasks(clonedTasks);
+      setEditedTask("");
+    }
   }
 
   function doneTask() {
@@ -41,7 +61,6 @@ export default function Task({ task, index, listName }) {
       setFinishedTasks([...finishedTasks, task]);
     }
   }
-  // is it a problem if everyTask isn't used
 
   function deleteTask(ev) {
     ev.stopPropagation();
@@ -62,13 +81,24 @@ export default function Task({ task, index, listName }) {
 
   return (
     <ListItem>
-      <TaskCard onMouseEnter={showCloseIcon} onMouseLeave={hideCloseIcon} onClick={doneTask}>
+      <TaskCard onMouseEnter={showCloseIcon} onMouseLeave={hideCloseIcon}>
         {listName === "Finished" ? (
-          <CheckBoxIcon sx={{ mx: 1 }} />
+          <CheckBoxIcon sx={{ mx: 1 }} onClick={doneTask} />
         ) : (
-          <CheckBoxOutlineBlankIcon sx={{ mx: 1 }} />
+          <CheckBoxOutlineBlankIcon sx={{ mx: 1 }} onClick={doneTask} />
         )}
-        <TaskText toggleCheck={toggleCheck}>{task}</TaskText>
+        {clicked ? (
+          <form onSubmit={editTask}>
+            <input
+              autoFocus
+              value={editedTask}
+              onChange={(ev) => setEditedTask(ev.target.value)}
+            ></input>
+          </form>
+        ) : (
+          <TaskText onClick={toggleEdit}>{task}</TaskText>
+        )}
+        {/* <TaskText toggleCheck={toggleCheck}>{task}</TaskText> */}
         <CloseIcon visibility={toggleX} sx={{ mx: 0.5 }} onClick={deleteTask} />
       </TaskCard>
     </ListItem>
