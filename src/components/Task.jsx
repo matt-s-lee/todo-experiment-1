@@ -15,7 +15,6 @@ export default function Task({ task, index, listName }) {
   const [clicked, setClicked] = useState(false);
   const [editedTask, setEditedTask] = useState("");
   const { allTasks, setAllTasks, finishedTasks, setFinishedTasks } = useContext(TaskContext);
-  console.log(toggleCheck);
 
   function showCloseIcon() {
     setToggleX("visible");
