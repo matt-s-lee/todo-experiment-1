@@ -7,6 +7,7 @@ import { Card } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import OutsideAlert from "../hooks/OutsideAlert";
 
 export default function Task({ task, index, listName }) {
   const [toggleX, setToggleX] = useState("hidden");
@@ -88,13 +89,15 @@ export default function Task({ task, index, listName }) {
           <CheckBoxOutlineBlankIcon sx={{ mx: 1 }} onClick={doneTask} />
         )}
         {clicked ? (
-          <form onSubmit={editTask}>
-            <input
-              autoFocus
-              value={editedTask}
-              onChange={(ev) => setEditedTask(ev.target.value)}
-            ></input>
-          </form>
+          <OutsideAlert clicked={clicked} setClicked={setClicked} editTask={editTask}>
+            <form onSubmit={editTask}>
+              <input
+                autoFocus
+                value={editedTask}
+                onChange={(ev) => setEditedTask(ev.target.value)}
+              ></input>
+            </form>
+          </OutsideAlert>
         ) : (
           <TaskText onClick={toggleEdit}>{task}</TaskText>
         )}
