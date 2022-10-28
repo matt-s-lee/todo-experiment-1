@@ -32,5 +32,7 @@ export default function Header() {
 const ThemeButton = styled(Box)`
   &:hover {
     color: ${(props) => (props.theme === "light" ? "grey" : "yellow")};
+    transition: transform 200ms ease-in-out;
+    transform: scale(1.05);
   }
 `;
