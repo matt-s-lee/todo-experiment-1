@@ -10,8 +10,15 @@ import List from "./components/List";
 import { Divider } from "./components/Divider";
 import { Box } from "@mui/system";
 import { TaskContext } from "./context/TaskContext";
+import { ThemeContext } from "./context/ThemeContext";
 
 const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+const lightTheme = createTheme({
   palette: {
     mode: "light",
   },
@@ -19,9 +26,10 @@ const darkTheme = createTheme({
 
 export default function App() {
   const { allTasks, finishedTasks } = useContext(TaskContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <CssBaseline />
       <Header />
       <Wrapper>
@@ -39,5 +47,5 @@ const Wrapper = styled(Box)`
   flex-direction: column;
   align-items: center;
 `;
-// themeprovider: how to toggle?
-// https://mui.com/material-ui/customization/dark-mode/#toggling-color-mode
+
+
