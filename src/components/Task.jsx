@@ -15,6 +15,7 @@ export default function Task({ task, index, listName }) {
   const [clicked, setClicked] = useState(false);
   const [editedTask, setEditedTask] = useState("");
   const { allTasks, setAllTasks, finishedTasks, setFinishedTasks } = useContext(TaskContext);
+  console.log(toggleCheck);
 
   function showCloseIcon() {
     setToggleX("visible");
@@ -99,9 +100,10 @@ export default function Task({ task, index, listName }) {
             </form>
           </OutsideAlert>
         ) : (
-          <TaskText onClick={toggleEdit}>{task}</TaskText>
+          <TaskText onClick={toggleEdit} listName={listName}>
+            {task}
+          </TaskText>
         )}
-        {/* <TaskText toggleCheck={toggleCheck}>{task}</TaskText> */}
         <CloseIcon visibility={toggleX} sx={{ mx: 0.5 }} onClick={deleteTask} />
       </TaskCard>
     </ListItem>
@@ -122,6 +124,5 @@ const TaskCard = styled(Card)`
 `;
 
 const TaskText = styled.span`
-  /* text-decoration: ${({ toggleCheck }) => toggleCheck && "line-through"}; */
-  text-decoration: ${(props) => (props.thing === "Finished" ? "line-through" : "none")};
+  text-decoration: ${(props) => (props.listName === "Finished" ? "line-through" : "none")};
 `;

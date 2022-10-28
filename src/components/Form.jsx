@@ -22,11 +22,11 @@ export default function Form() {
           variant="outlined"
           value={task}
           onChange={(ev) => setTask(ev.target.value)}
-          sx={{ color: "black" }}
+          sx={{ color: "white" }}
         />
         <FormHelperText id="component-helper-text">What do you need to do?</FormHelperText>
       </FormControl>
-      <Button sx={{ my: 2, color: "black", border: "1px solid grey" }} onClick={handleSubmit}>
+      <Button sx={{ my: 2, border: "1px solid grey" }} onClick={handleSubmit}>
         Submit
       </Button>
     </FormWrapper>
